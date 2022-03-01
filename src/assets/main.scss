@@ -64,6 +64,10 @@ body {
   cursor: pointer;
 }
 
+.loader {
+  text-align: center;
+}
+
 // FILTER
 .filter {
   display: flex;
@@ -266,7 +270,7 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 5px;
-    &__flour {
+    &__floor {
       font-weight: bold;
       font-size: 12px;
       line-height: 28px;
@@ -276,8 +280,13 @@ body {
       font-weight: bold;
       font-size: 12px;
       line-height: 28px;
+      position: relative;
       span {
         opacity: 0.5;
+      }
+      sup {
+        font-size: 10px;
+        line-height: 1;
       }
     }
   }
