@@ -23,7 +23,6 @@ export default new Vuex.Store({
         "https://frontendsite-test-default-rtdb.asia-southeast1.firebasedatabase.app/buildings.json"
       );
       const data = await res.json();
-      console.log(data);
       commit("SET_BUILDINGS", data);
     },
   },
