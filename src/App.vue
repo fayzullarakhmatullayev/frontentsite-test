@@ -2,6 +2,9 @@
   <div class="container">
     <h1 class="title">Lorem ipsum dolor sit</h1>
     <the-filter @submitHandler="submitHandler" @reset="isFiltered = false" />
+    <p v-if="isFiltered && !filteredItems.length" class="empty">
+      Ничего не найдено
+    </p>
     <div class="card">
       <div
         class="card-item"
@@ -66,9 +69,16 @@ export default {
     },
     submitHandler(payload) {
       this.isFiltered = true;
-      const filteredItems = this.buildings.filter((blog) => {
+      this.filteredItems.length = 0;
+      let filteredSize = [] || this.buildings;
+      payload.size.forEach((element) => {
+        const el = this.buildings.filter((e) => {
+          return e.size === element;
+        });
+        filteredSize.push(...el);
+      });
+      filteredSize = filteredSize.filter((blog) => {
         return (
-          blog.size.includes(payload.size) &&
           blog.price > payload.price.min * 1000000 &&
           payload.price.max * 1000000 > blog.price &&
           blog.square > payload.square.min &&
@@ -77,7 +87,8 @@ export default {
           payload.floor.max >= blog.floor
         );
       });
-      this.filteredItems = filteredItems;
+
+      this.filteredItems = filteredSize;
     },
   },
   async mounted() {

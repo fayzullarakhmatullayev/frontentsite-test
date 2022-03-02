@@ -7,7 +7,7 @@
         @click="getRoomsCount($event)"
       >
         <div class="filter-rooms__btn" data-size="XS">S</div>
-        <div class="filter-rooms__btn active" data-size="1k">1к</div>
+        <div class="filter-rooms__btn" data-size="1k">1к</div>
         <div class="filter-rooms__btn" data-size="2k">2к</div>
         <div class="filter-rooms__btn" data-size="3k">3к</div>
       </div>
@@ -49,14 +49,14 @@
         <input
           type="range"
           class="slider-1"
-          min="20"
+          min="0"
           max="999"
           v-model="square.min"
         />
         <input
           type="range"
           class="slider-2"
-          min="20"
+          min="0"
           max="999"
           v-model="square.max"
         />
@@ -109,7 +109,7 @@ export default {
   emits: ["submitHandler", "reset"],
   data() {
     return {
-      size: ["1k"],
+      size: [],
       floor: {
         min: 1,
         max: 99,
@@ -208,7 +208,6 @@ export default {
       });
       filtetRoomsBtn.forEach((btn) => {
         btn.classList.remove("active");
-        filtetRoomsBtn[1].classList.add("active");
       });
       this.$emit("reset");
     },
