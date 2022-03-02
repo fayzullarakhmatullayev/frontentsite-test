@@ -1,7 +1,18 @@
 <template>
   <div class="container">
-    <h1 class="title">Lorem ipsum dolor sit</h1>
-    <the-filter @submitHandler="submitHandler" @reset="isFiltered = false" />
+    <div class="top">
+      <h1 class="title">Lorem ipsum dolor sit</h1>
+      <div class="burger" @click="isMenuOpen = !isMenuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <the-filter
+      @submitHandler="submitHandler"
+      @reset="isFiltered = false"
+      :class="{ 'filter-mobile': isMenuOpen }"
+    />
     <p v-if="isFiltered && !filteredItems.length" class="empty">
       Ничего не найдено
     </p>
@@ -36,6 +47,7 @@
         <button class="card-btn btn">ПОДРОБНЕЕ</button>
       </div>
     </div>
+    <div class="overlay" v-show="isMenuOpen" @click="isMenuOpen = false"></div>
   </div>
 </template>
 
@@ -49,6 +61,7 @@ export default {
     return {
       filteredItems: [],
       isFiltered: false,
+      isMenuOpen: false,
     };
   },
   computed: {
@@ -70,12 +83,12 @@ export default {
     submitHandler(payload) {
       this.isFiltered = true;
       this.filteredItems.length = 0;
-      let filteredSize = [] || this.buildings;
-      payload.size.forEach((element) => {
-        const el = this.buildings.filter((e) => {
-          return e.size === element;
+      let filteredSize = [];
+      payload.size.forEach((size) => {
+        const blogs = this.buildings.filter((blog) => {
+          return blog.size === size;
         });
-        filteredSize.push(...el);
+        filteredSize.push(...blogs);
       });
       filteredSize = filteredSize.filter((blog) => {
         return (

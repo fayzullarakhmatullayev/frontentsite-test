@@ -188,7 +188,7 @@ export default {
     resetFilter() {
       const sliderTracks = document.querySelectorAll(".slider-track");
       const filtetRoomsBtn = document.querySelectorAll(".filter-rooms__btn");
-      this.size = ["1k"];
+      this.size = [];
       this.floor = {
         min: 1,
         max: 99,
