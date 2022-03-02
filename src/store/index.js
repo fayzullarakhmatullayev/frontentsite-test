@@ -19,11 +19,15 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchData({ commit }) {
-      const res = await fetch(
-        "https://frontendsite-test-default-rtdb.asia-southeast1.firebasedatabase.app/buildings.json"
-      );
-      const data = await res.json();
-      commit("SET_BUILDINGS", data);
+      try {
+        const res = await fetch(
+          "https://frontendsite-test-default-rtdb.asia-southeast1.firebasedatabase.app/buildings.json"
+        );
+        const data = await res.json();
+        commit("SET_BUILDINGS", data);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 });
